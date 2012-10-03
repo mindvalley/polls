@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Email:</b>
+  <%= @employee.email %>
+</p>
+
+<p>
+  <b>Date joined:</b>
+  <%= @employee.date_joined %>
+</p>
+
+<p>
+  <b>Votable:</b>
+  <%= @employee.votable %>
+</p>
+
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>

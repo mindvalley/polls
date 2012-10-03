@@ -1,0 +1,96 @@
+<div class="box">
+  <div class="box-title">
+    Download Voters
+  </div>
+  <div class="box-content nopadding">
+    <%= form_tag(downloads_voters_path, :multipart => true, :class => 'form-horizontal') do %>
+      <div class="control-group">
+        <label class="control-label">Period</label>
+        <div class="controls">
+          <%= text_field_tag :period, current_period, placeholder: current_period %>
+          <span class="help-inline">voting period in YYYY-MM format (e.g. 2012-08 for the period September 2012)</span>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class='icon-circle-arrow-down icon-white'></i> Download
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="box">
+  <div class="box-title">
+    Upload Salaries and Compute Results
+  </div>
+  <div class="box-content nopadding">
+    <%= form_tag(uploads_salaries_path, :multipart => true, :class => 'form-horizontal') do %>
+      <div class="control-group">
+        <label class="control-label">Salaries CSV</label>
+        <div class="controls">
+          <%= file_field_tag :csv %>
+          <span class="help-inline">.csv (comma separated values) format file with the headers: Email, Salary</span>
+        </div>
+        <label class="control-label">Period</label>
+        <div class="controls">
+          <%= text_field_tag :period, current_period, placeholder: current_period %>
+          <span class="help-inline">voting period in YYYY-MM format (e.g. 2012-08 for the period September 2012)</span>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class='icon-circle-arrow-up icon-white'></i> Upload
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="box">
+  <div class="box-title">
+    Upload Employees
+  </div>
+  <div class="box-content nopadding">
+    <%= form_tag(uploads_employees_path, :multipart => true, :class => 'form-horizontal') do %>
+      <div class="control-group">
+        <label class="control-label">Employees CSV</label>
+        <div class="controls">
+          <%= file_field_tag :csv %>
+          <span class="help-inline">.csv (comma separated values) format file with the headers: Status, Team, Nick Name, Full Legal Name, Email, Start Date</span>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class='icon-circle-arrow-up icon-white'></i> Upload
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="box">
+  <div class="box-title">
+    Employee List
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped" id="results">
+      <thead>
+        <th>Nick Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Team</th>
+      </thead>
+      <tbody>
+        <% @employees.each do |employee| %>
+          <tr>
+            <td><%= employee.nick_name %></td>
+            <td><%= employee.email_address %></td>
+            <td><%= employee.status %></td>
+            <td><%= employee.team %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

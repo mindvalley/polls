@@ -1,0 +1,27 @@
+<div class="box">
+  <div class="box-title">
+    Results
+  </div>
+  <div class="box-content">
+    <table class="table table-bordered table-striped" id="results">
+      <thead>
+        <th>Nick Name</th>
+        <th>Email</th>
+        <th>Team</th>
+        <th>Points</th>
+      </thead>
+      <tbody>
+        <% @results.lines.each do |result| %>
+          <% employee = Employee.where(email_address: result[0]).first %>
+          <tr>
+            <td><%= employee.nick_name %></td>
+            <td><%= result[0] %></td>
+            <td><%= employee.team %></td>
+            <td><%= result[1] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Community Awards</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <script type="text/javascript" src="https://raw.github.com/Mottie/tablesorter/master/js/jquery.tablesorter.min.js"></script> 
+    
+    <%= csrf_meta_tags %>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+  </head>
+  <body>
+    <div class="container-fluid nopadding">
+
+      <div class="row-fluid">
+        <div class="span12">
+          <%= render partial: 'layouts/header' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container" id="container">
+          <div class="row">
+            <div class="span12" id="content">
+              <div class="row">
+                <div class="span12">
+                  <% flash.each do |name, msg| %>
+                    <%= content_tag :div, :id => "flash_#{name}", :class => 'alert alert-success' do %>
+                      <button class="close" data-dismiss="alert">×</button>
+                      <strong>Success! </strong><%= msg %>
+                    <% end %>
+                  <% end %>
+                  <%= yield %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explorer canvas, for IE6-8 support of canvas elements -->
+    <!--[if lt IE 9]>
+        <script src="js/excanvas.min.js"></script>
+    <![endif]-->
+
+  </body>
+</html>

@@ -1,0 +1,140 @@
+ <p>This is your opportunity to recognize everyone that is helping us to 
+    <strong>"Be Awesome, Deliver Awesome."</strong></p>
+
+<p>The goal here is to truly reward those that are <strong>living and breathing our values
+every day</strong> and those that are <strong>helping us deliver results.</strong></p>
+
+<p>Who to reward?</p>
+
+<ul>
+  <li>think of the people <strong>driving the company forward</strong> and <strong>helping us break through sales records</strong></li>
+  <li>think of the people who <strong>inspire you to grow</strong> because they act as <strong>role models to emulate</strong></li>
+  <li>think of the people who <strong>make coming to work</strong> each day <strong>joyous and exciting</strong></li>
+  <li>think of the <strong>silent heroes</strong> who keep everything in check and <strong>demonstrate excellence</strong></li>
+  <li>think of the <strong>innovators and process builders</strong> who make us <strong>leaner and expand our impact</strong></li>
+  <li>think of the <strong>various specialists</strong> who <strong>propel us forward</strong> with their knowledge</li>
+</ul>
+
+<hr />
+
+<%= form_for(@ballot) do |f| %>
+  <div id="pointsReminderWrapper">
+    <div id="pointsReminder">
+      <p>
+        You have <strong><span id="pointsRemaining">100</span> points</strong>. Distribute them however you want.
+        <button id="reset" class="btn btn-danger">Reset Values</button>
+        <button id="submit" type="submit" class="btn btn-primary">Submit Ballot</button>
+      </p>
+    </div>
+  </div>
+
+  <div style="height: 17px;"></div>
+
+  <div class="box-content">
+    <table class="table table-bordered table-striped" id="ballot">
+      <thead>
+        <th>Nick Name</th>
+        <th>Full Name</th>
+        <th>Team</th>
+        <th colspan="2">Score</th>
+      </thead>
+      <tbody>
+        <% @ballot.votes.each_with_index do |vote, index| %>
+          <% employee = Employee.find(vote.candidate) %>
+          <% next if employee.email_address == current_user.email_address %>
+          <% slider_id = "#{employee.email_address.parameterize}-slider" %>
+          <% text_id = "#{employee.email_address.parameterize}-text" %>
+          <tr>
+            <td style="vertical-align:middle"><%= employee.nick_name %></td>
+            <td style="vertical-align:middle"><%= employee.full_legal_name %></td>
+            <td style="vertical-align:middle"><%= employee.team %></td>
+            <td style="vertical-align:middle">
+              <div class="controls" style="text-align: center">
+                0
+                <%= range_field_tag nil, vote.points || 0, :id => slider_id, :class => 'points slider', data: { target: text_id } %>
+                100
+              </div>
+            </td>
+            <td style="vertical-align:middle">
+              <div class="controls" style="text-align: center">
+              <%= text_field_tag "ballot[votes_attributes][][points]", vote.points || 0, :id => text_id, :class => 'span1 points text', maxlength: 3, data: { target: slider_id } %>
+              <%= hidden_field_tag "ballot[votes_attributes][][candidate]", vote.candidate %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <th>Nick Name</th>
+        <th>Full Name</th>
+        <th>Team</th>
+        <th colspan="2">Score</th>
+      </tfoot>
+    </table>
+  </div>
+<% end %>
+
+<script>
+$(document).ready(function() { 
+  $("#ballot").tablesorter();
+
+  function calculate() {
+    var total=0
+    $('.points').each(function(n) {
+      total += Number($(this).val());
+    })
+
+    $('#pointsRemaining').html(100 - (total / 2))
+    if ((total / 2) > 100) {
+      $('#submit').attr("disabled", "disabled")
+    } else {
+      $('#submit').removeAttr("disabled")
+    }
+  }
+
+  calculate()
+
+  $(".points").on('change', function() {
+    $this = $(this)
+    $('#' + $this.data('target')).val($this.val())
+
+    calculate()
+
+  });
+
+  $('#reset').click(function(event) {
+    $('.points').each(function() {
+      $this = $(this)
+      console.log($this.val())
+      $this.val(0)
+
+      calculate()
+    })
+    event.preventDefault()
+  })
+
+})
+</script>
+
+<script>
+$(function () {
+  
+  var msie6 = $.browser == 'msie' && $.browser.version < 7;
+  
+  if (!msie6) {
+    var top = $('#pointsReminder').offset().top - parseFloat($('#pointsReminder').css('margin-top').replace(/auto/, 0));
+    $(window).scroll(function (event) {
+      // what the y position of the scroll is
+      var y = $(this).scrollTop();
+      
+      // whether that's below the form
+      if (y >= top) {
+        // if so, ad the fixed class
+        $('#pointsReminder').addClass('fixed');
+      } else {
+        // otherwise remove it
+        $('#pointsReminder').removeClass('fixed');
+      }
+    });
+  }  
+});
+</script>

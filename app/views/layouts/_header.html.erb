@@ -1,0 +1,23 @@
+<div id="header">
+  <a href="/">
+
+  </a>
+  <div class="hright">
+    <div id="search" class="column">
+<!--       <div class="search">
+        <form method="post" action="index.html#">
+          <input type="text" placeholder="Search here" value="Search here" name="keyword" id="keyword" />
+        </form>
+      </div>
+ -->
+    </div>
+    <div id="userinfo" class="column">
+      <a class="userinfo dropown-toggle" data-toggle="dropdown" href="#userinfo">
+        <span><strong><%= current_user.email_address %></strong></span>
+      </a>
+        <ul class="dropdown-menu">
+          <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+        </ul>
+    </div>
+  </div>
+</div>

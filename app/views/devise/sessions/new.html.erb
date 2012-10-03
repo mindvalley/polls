@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, :id => "flash_#{name}", :class => "alert alert-#{name}" do %>
+          <button class="close" data-dismiss="alert">×</button>
+          <strong><%= name.to_s.humanize %>! </strong><%= msg %>
+        <% end %>
+      <% end %>
+
+      <div class="box login">
+        <div class="box-title">
+          <span class="ico"><i class="icon-lock"></i></span> Login
+        </div>
+        <div class="box-content">
+          <center><%= link_to 'Sign in with your Mindvalley Google account', user_omniauth_authorize_path(:google_apps, app_domain: 'mindvalley.com') %></center>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
