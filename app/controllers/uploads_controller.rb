@@ -65,7 +65,7 @@ class UploadsController < ApplicationController
       salary_table.each do |email_address, salary|
         if user = User.where(email_address: email_address).first
           ballot = user.ballots.where(period: params[:period]).first
-          ballot.adjustment_factor = (salary.to_f / total_salaries.to_f) * 100
+          ballot.adjustment_factor = (salary.to_f / total_salaries.to_f)
           ballot.save!
         end
       end

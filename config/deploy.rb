@@ -5,9 +5,9 @@ load 'deploy/assets'
 load "config/recipes/base"
 
 set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
-set :application, "CommunityAwards"
-set :server_name, 'awards.mindvalley.net'
-set :repository,  "git://github.com/mindvalley/community_awards.git"
+set :application, "Polls"
+set :server_name, 'polls.mindvalley.net'
+set :repository,  "git://github.com/mindvalley/polls.git"
 set :user, "mvdev"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :use_sudo, false

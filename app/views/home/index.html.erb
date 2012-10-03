@@ -1,19 +1,4 @@
- <p>This is your opportunity to recognize everyone that is helping us to 
-    <strong>"Be Awesome, Deliver Awesome."</strong></p>
-
-<p>The goal here is to truly reward those that are <strong>living and breathing our values
-every day</strong> and those that are <strong>helping us deliver results.</strong></p>
-
-<p>Who to reward?</p>
-
-<ul>
-  <li>think of the people <strong>driving the company forward</strong> and <strong>helping us break through sales records</strong></li>
-  <li>think of the people who <strong>inspire you to grow</strong> because they act as <strong>role models to emulate</strong></li>
-  <li>think of the people who <strong>make coming to work</strong> each day <strong>joyous and exciting</strong></li>
-  <li>think of the <strong>silent heroes</strong> who keep everything in check and <strong>demonstrate excellence</strong></li>
-  <li>think of the <strong>innovators and process builders</strong> who make us <strong>leaner and expand our impact</strong></li>
-  <li>think of the <strong>various specialists</strong> who <strong>propel us forward</strong> with their knowledge</li>
-</ul>
+ <h1>Copy here</h1>
 
 <hr />
 
@@ -33,21 +18,16 @@ every day</strong> and those that are <strong>helping us deliver results.</stron
   <div class="box-content">
     <table class="table table-bordered table-striped" id="ballot">
       <thead>
-        <th>Nick Name</th>
-        <th>Full Name</th>
-        <th>Team</th>
+        <th>Value</th>
         <th colspan="2">Score</th>
       </thead>
       <tbody>
-        <% @ballot.votes.each_with_index do |vote, index| %>
-          <% employee = Employee.find(vote.candidate) %>
-          <% next if employee.email_address == current_user.email_address %>
-          <% slider_id = "#{employee.email_address.parameterize}-slider" %>
-          <% text_id = "#{employee.email_address.parameterize}-text" %>
+        <% @ballot.votes.shuffle.each_with_index do |vote, index| %>
+          <% entry = Entry.find(vote.candidate) %>
+          <% slider_id = "#{entry.name.parameterize}-slider" %>
+          <% text_id = "#{entry.name.parameterize}-text" %>
           <tr>
-            <td style="vertical-align:middle"><%= employee.nick_name %></td>
-            <td style="vertical-align:middle"><%= employee.full_legal_name %></td>
-            <td style="vertical-align:middle"><%= employee.team %></td>
+            <td style="vertical-align:middle"><%= entry.name %></td>
             <td style="vertical-align:middle">
               <div class="controls" style="text-align: center">
                 0
@@ -64,9 +44,7 @@ every day</strong> and those that are <strong>helping us deliver results.</stron
         <% end %>
       </tbody>
       <tfoot>
-        <th>Nick Name</th>
-        <th>Full Name</th>
-        <th>Team</th>
+        <th>Value</th>
         <th colspan="2">Score</th>
       </tfoot>
     </table>

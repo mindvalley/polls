@@ -16,7 +16,7 @@ class Ballot
       af = ballot.adjustment_factor
       ballot.votes.each do |vote|
         next if vote.nil?
-        result[Employee.find(vote.candidate).email_address] += vote.points.to_f * af
+        result[Entry.find(vote.candidate).name] += vote.points.to_f * af
       end
     end
     (result.sort_by {|k,v| v}).reverse
