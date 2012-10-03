@@ -12,7 +12,8 @@ class Employee
   field :start_date_dd_mm_yy, type: String
   field :votable, type: Boolean, default: true
   field :team, type: String, default: ->{ team.nil? ? '' : team.downcase }
-  field :status
+  field :status, type: String
+  field :nick_name, type: String
 
   belongs_to :user
 
