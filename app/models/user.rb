@@ -28,7 +28,7 @@ class User
 
   def can_vote?
     info.update_date_joined if info.date_joined.nil?
-    info.status == 'confirmed' && ((Date.today - 6.months) > info.date_joined)
+    info.status == 'confirmed' && ((Date.today - 6.months) > (info.date_joined || 0)
   end
 
   def self.find_for_googleapps_oauth(access_token, signed_in_resource=nil)
