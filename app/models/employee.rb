@@ -18,7 +18,7 @@ class Employee
   belongs_to :user
 
   def update_date_joined
-    self.date_joined = Date.parse(self.start_date_dd_mm_yy)
+    self.date_joined = Date.parse(self.start_date_dd_mm_yy) if self.start_date_dd_mm_yy
     self.save!
   end
 
