@@ -17,7 +17,7 @@ class User
   def self.all_who_voted(period)
     voters = []
     Ballot.where(period: period).each do |ballot|
-      voters << ballot.voter if ballot.voter.can_vote?
+      voters << ballot.voter if ballot.voter && ballot.voter.can_vote?
     end
     voters.sort { |a,b| a.email_address <=> b.email_address}
   end
