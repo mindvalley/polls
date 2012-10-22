@@ -80,6 +80,7 @@
         <th>Email</th>
         <th>Status</th>
         <th>Team</th>
+        <th>Date Joined</th>
       </thead>
       <tbody>
         <% @employees.each do |employee| %>
@@ -88,6 +89,7 @@
             <td><%= employee.email_address %></td>
             <td><%= employee.status %></td>
             <td><%= employee.team %></td>
+            <td><%= employee.date_joined %></td>
           </tr>
         <% end %>
       </tbody>
