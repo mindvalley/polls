@@ -24,7 +24,7 @@ class UploadsController < ApplicationController
           employee = Employee.create! line
         end
         begin
-          employee.date_joined = Date.parse(employee.start_date_dd_mm_yy)
+          employee.date_joined = Date.parse(employee.start_date_dd_mm_yy) if employee.start_date_dd_mm_yy
         rescue Exception => e
           logger.error "#{e.message} #{e.backtrace}"
         end
