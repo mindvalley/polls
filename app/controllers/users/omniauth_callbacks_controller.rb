@@ -11,7 +11,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def new_session_path
-    super
+  def new_session_path(*args)
+    super(*args)
   end
 end
